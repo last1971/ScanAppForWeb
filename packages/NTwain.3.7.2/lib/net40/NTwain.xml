@@ -1523,11 +1523,15 @@
             <param name="source">The source.</param>
             <param name="capability">The capability.</param>
             <param name="getConversionRoutine">The value conversion routine in Get methods.</param>
+            <param name="readOnly">if set to <c>true</c> then make this cap read-only.</param>
             <exception cref="T:System.ArgumentNullException">
             source
             or
             getConversionRoutine
             </exception>
+            <exception cref="T:System.ArgumentNullException">source
+            or
+            getConversionRoutine</exception>
         </member>
         <member name="M:NTwain.CapWrapper`1.#ctor(NTwain.IDataSource,NTwain.Data.CapabilityId,System.Func{System.Object,`0},System.Func{`0,NTwain.Data.TWOneValue})">
             <summary>
@@ -1798,10 +1802,11 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:NTwain.DataSource.GetStatusUtf8">
+        <member name="M:NTwain.DataSource.GetStatusUtf8(NTwain.Data.TWStatus)">
             <summary>
-            Gets the source status. Only call this at state 4 or higher.
+            Gets the source status string. Only call this at state 4 or higher.
             </summary>
+            <param name="status">Status from previous calls.</param>
             <returns></returns>
         </member>
         <member name="P:NTwain.DataSource.Id">
@@ -4747,6 +4752,1369 @@
             </summary>
             <value>The device event.</value>
         </member>
+        <member name="T:NTwain.ICapabilities">
+            <summary>
+            Exposes capabilities of a data source as properties.
+            </summary>
+        </member>
+        <member name="P:NTwain.ICapabilities.ACapXferMech">
+            <summary>
+            Gets the property to work with audio <see cref="T:NTwain.Data.XferMech"/> for the current source.
+            </summary>
+            <value>
+            The audio xfer mech.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapAlarms">
+            <summary>
+            Gets the property to work with alarms for the current source.
+            </summary>
+            <value>
+            The alarms.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapAlarmVolume">
+            <summary>
+            Gets the property to work with alarm volume for the current source.
+            </summary>
+            <value>
+            The alarm volume.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapAuthor">
+            <summary>
+            Gets the property to work with the name or other identifying information about the 
+            Author of the image. It may include a copyright string.
+            </summary>
+            <value>
+            The author string.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapAutoFeed">
+            <summary>
+            Gets the property to work with auto feed page flag for the current source.
+            </summary>
+            <value>
+            The auto feed flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapAutomaticCapture">
+            <summary>
+            Gets the property to work with auto capture count for the current source.
+            </summary>
+            <value>
+            The auto capture count.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapAutomaticSenseMedium">
+            <summary>
+            Gets the property to work with auto-sense medium (paper source) flag.
+            </summary>
+            <value>
+            The auto-sense medium flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapAutoScan">
+            <summary>
+            Gets the property to work with auto scan page flag for the current source.
+            </summary>
+            <value>
+            The auto scan flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapBatteryMinutes">
+            <summary>
+            Gets the property to see the remaining battery power for the device.
+            </summary>
+            <value>
+            The battery minutes.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapBatteryPercentage">
+            <summary>
+            Gets the property to see the remaining battery percentage for the device.
+            </summary>
+            <value>
+            The battery percentage.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapCameraEnabled">
+            <summary>
+            Gets the property to work with camera enabled flag.
+            </summary>
+            <value>
+            The camera enabled flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapCameraOrder">
+            <summary>
+            Gets the property to work with camera order for the current source.
+            </summary>
+            <value>
+            The camera order setting.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapCameraPreviewUI">
+            <summary>
+            Gets the property to see whether device supports camera preview UI flag.
+            </summary>
+            <value>
+            The camera preview UI flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapCameraSide">
+            <summary>
+            Gets the property to work with camera side for the current source.
+            </summary>
+            <value>
+            The camera side.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapCaption">
+            <summary>
+            Gets the property to work with the general note about the acquired image.
+            </summary>
+            <value>
+            The general note string.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapClearBuffers">
+            <summary>
+            Gets the property to work with the clear buffers option for the current source.
+            </summary>
+            <value>
+            The clear buffers option.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapClearPage">
+            <summary>
+            Gets the property to work with clear page flag for the current source.
+            </summary>
+            <value>
+            The clear page flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapCustomDSData">
+            <summary>
+            Gets the property to see whether device supports custom data triplets.
+            </summary>
+            <value>
+            The custom data flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapCustomInterfaceGuid">
+            <summary>
+            Gets the property for device interface guid.
+            </summary>
+            <value>
+            The device interface guid.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapDeviceEvent">
+            <summary>
+            Gets the property to work with the reported device events for the current source.
+            </summary>
+            <value>
+            The reported device events.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapDeviceOnline">
+            <summary>
+            Gets the property to work with devince online flag for the current source.
+            </summary>
+            <value>
+            The devince online flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapDeviceTimeDate">
+            <summary>
+            Gets the property to work with the device's time and date.
+            </summary>
+            <value>
+            The device time and date.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapDoubleFeedDetection">
+            <summary>
+            Gets the property to work with double feed detection option for the current source.
+            </summary>
+            <value>
+            The double feed detection option.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapDoubleFeedDetectionLength">
+            <summary>
+            Gets the property to work with double feed detection length for the current source.
+            </summary>
+            <value>
+            The double feed detection length.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapDoubleFeedDetectionResponse">
+            <summary>
+            Gets the property to work with double feed detection response for the current source.
+            </summary>
+            <value>
+            The double feed detection response.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapDoubleFeedDetectionSensitivity">
+            <summary>
+            Gets the property to work with double feed detection sensitivity for the current source.
+            </summary>
+            <value>
+            The double feed detection sensitivity.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapDuplex">
+            <summary>
+            Gets the property to see what's the duplex mode for the current source.
+            </summary>
+            <value>
+            The duplex mode.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapDuplexEnabled">
+            <summary>
+            Gets the property to work with duplex enabled flag for the current source.
+            </summary>
+            <value>
+            The duplex enabled flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapEnableDSUIOnly">
+            <summary>
+            Gets the property to see whether device supports UI only flag (no transfer).
+            </summary>
+            <value>
+            The UI only flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapEndorser">
+            <summary>
+            Gets the property to work with endorser for the current source.
+            </summary>
+            <value>
+            The endorser option.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapExtendedCaps">
+            <summary>
+            Gets the extended caps for the current source.
+            </summary>
+            <value>
+            The extended caps.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapFeederAlignment">
+            <summary>
+            Gets the property to work with feeder alignment for the current source.
+            </summary>
+            <value>
+            The feeder alignment.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapFeederEnabled">
+            <summary>
+            Gets the property to work with feeder enabled flag for the current source.
+            </summary>
+            <value>
+            The feeder enabled flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapFeederLoaded">
+            <summary>
+            Gets the property to work with feeder loaded flag for the current source.
+            </summary>
+            <value>
+            The feeder loaded flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapFeederOrder">
+            <summary>
+            Gets the property to work with feeder order for the current source.
+            </summary>
+            <value>
+            The feeder order.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapFeederPocket">
+            <summary>
+            Gets the property to work with feeder pocket for the current source.
+            </summary>
+            <value>
+            The feeder pocket setting.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapFeederPrep">
+            <summary>
+            Gets the property to work with feeder prep flag.
+            </summary>
+            <value>
+            The feeder prep flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapFeedPage">
+            <summary>
+            Gets the property to work with feed page flag for the current source.
+            </summary>
+            <value>
+            The feed page flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapIndicators">
+            <summary>
+            Gets the property to work with indicators flag for the current source.
+            </summary>
+            <value>
+            The indicators flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapIndicatorsMode">
+            <summary>
+            Gets the property to work with diplayed indicators for the current source.
+            </summary>
+            <value>
+            The diplayed indicators.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapJobControl">
+            <summary>
+            Gets the property to work with job control option for the current source.
+            </summary>
+            <value>
+            The job control option.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapLanguage">
+            <summary>
+            Gets the property to work with string data language for the current source.
+            </summary>
+            <value>
+            The language.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapMaxBatchBuffers">
+            <summary>
+            Gets the property to work with the max buffered pages for the current source.
+            </summary>
+            <value>
+            The max batch buffered pages.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapMicrEnabled">
+            <summary>
+            Gets the property to work with check scanning support flag.
+            </summary>
+            <value>
+            The check scanning support flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapPaperDetectable">
+            <summary>
+            Gets the property to work with paper sensor flag for the current source.
+            </summary>
+            <value>
+            The paper sensor flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapPaperHandling">
+            <summary>
+            Gets the property to work with paper handling option for the current source.
+            </summary>
+            <value>
+            The paper handling option.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapPowerSaveTime">
+            <summary>
+            Gets the property to work with camera power down time (seconds) for the current source.
+            </summary>
+            <value>
+            The camera power down time.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapPowerSupply">
+            <summary>
+            Gets the property to see current device's power supply.
+            </summary>
+            <value>
+            The power supply indicator.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapPrinter">
+            <summary>
+            Gets the property to work with printer list for the current source.
+            </summary>
+            <value>
+            The printer list.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapPrinterCharRotation">
+            <summary>
+            Gets the property to work with printer character rotation for the current source.
+            </summary>
+            <value>
+            The printer character rotation.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapPrinterEnabled">
+            <summary>
+            Gets the property to work with printer enabled flag.
+            </summary>
+            <value>
+            The printer enabled flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapPrinterFontStyle">
+            <summary>
+            Gets the property to work with printer font style for the current source.
+            </summary>
+            <value>
+            The printer font style.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapPrinterIndex">
+            <summary>
+            Gets the property to work with the starting printer index for the current source.
+            </summary>
+            <value>
+            The printer index.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapPrinterIndexLeadChar">
+            <summary>
+            Set the character to be used for filling the leading digits before the counter value if the
+            counter digits are fewer than <see cref="P:NTwain.ICapabilities.CapPrinterIndexNumDigits"/>.
+            </summary>
+            <value>
+            The printer leading string.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapPrinterIndexMaxValue">
+            <summary>
+            Gets the property to work with printer index max value for the current source.
+            </summary>
+            <value>
+            The printer index max value.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapPrinterIndexNumDigits">
+            <summary>
+            Gets the property to work with printer number digits value for the current source.
+            </summary>
+            <value>
+            The printer number digits value.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapPrinterIndexStep">
+            <summary>
+            Gets the property to work with printer index step value for the current source.
+            </summary>
+            <value>
+            The printer index step value.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapPrinterIndexTrigger">
+            <summary>
+            Gets the property to work with printer index trigger for the current source.
+            </summary>
+            <value>
+            The printer index trigger.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapPrinterMode">
+            <summary>
+            Gets the property to work with printer mode for the current source.
+            </summary>
+            <value>
+            The printer mode.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapPrinterString">
+            <summary>
+            Specifies the string(s) that are to be used in the string component when the current <see cref="P:NTwain.ICapabilities.CapPrinter"/>
+            device is enabled.
+            </summary>
+            <value>
+            The printer string.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapPrinterStringPreview">
+            <summary>
+            Gets the next print values.
+            </summary>
+            <value>
+            The next print values.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapPrinterSuffix">
+            <summary>
+            Specifies the string that shall be used as the current <see cref="P:NTwain.ICapabilities.CapPrinter"/> device’s suffix.
+            </summary>
+            <value>
+            The printer suffix string.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapPrinterVerticalOffset">
+            <summary>
+            Gets the property to work with printer y-offset for the current source.
+            </summary>
+            <value>
+            The printer y-offset.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapReacquireAllowed">
+            <summary>
+            Gets the property to see whether device supports reacquire flag.
+            </summary>
+            <value>
+            The reacquire flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapRewindPage">
+            <summary>
+            Gets the property to work with rewind page flag for the current source.
+            </summary>
+            <value>
+            The rewind page flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapSegmented">
+            <summary>
+            Gets the property to work with segmentation setting for the current source.
+            </summary>
+            <value>
+            The segmentation setting.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapSerialNumber">
+            <summary>
+            Gets the property for device serial number.
+            </summary>
+            <value>
+            The device serial number.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapSupportedCaps">
+            <summary>
+            Gets the supported caps for the current source. This is not supported by all sources.
+            </summary>
+            <value>
+            The supported caps.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapSupportedCapsSegmentUnique">
+            <summary>
+            Gets the supported caps for unique segments for the current source.
+            </summary>
+            <value>
+            The supported caps for unique segments.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapSupportedDATs">
+            <summary>
+            Gets the supported caps for supported DATs.
+            </summary>
+            <value>
+            The supported DATs.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapThumbnailsEnabled">
+            <summary>
+            Gets the property to work with thumbnails enabled flag for the current source.
+            </summary>
+            <value>
+            The thumbnails enabled flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapTimeBeforeFirstCapture">
+            <summary>
+            Gets the property to work with the time before first capture (milliseconds) for the current source.
+            </summary>
+            <value>
+            The time before first capture.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapTimeBetweenCaptures">
+            <summary>
+            Gets the property to work with the time between captures (milliseconds) for the current source.
+            </summary>
+            <value>
+            The time between captures.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapTimeDate">
+            <summary>
+            Gets the property to get the image acquired time and date.
+            </summary>
+            <value>
+            The time and date string.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapUIControllable">
+            <summary>
+            Gets the property to work with UI controllable flag for the current source.
+            </summary>
+            <value>
+            The UI controllable flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.CapXferCount">
+            <summary>
+            Gets the property to work with xfer count for the current source.
+            </summary>
+            <value>
+            The xfer count.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapAutoBright">
+            <summary>
+            Gets the property to work with image auto brightness flag for the current source.
+            </summary>
+            <value>
+            The image auto brightness flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapAutoDiscardBlankPages">
+            <summary>
+            Gets the property to work with image blank page behavior for the current source.
+            </summary>
+            <value>
+            The image blank page behavior.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapAutomaticBorderDetection">
+            <summary>
+            Gets the property to work with auto border detection flag for the current source.
+            </summary>
+            <value>
+            The auto border detection flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapAutomaticColorEnabled">
+            <summary>
+            Gets the property to work with image auto color detection flag for the current source.
+            </summary>
+            <value>
+            The image auto color detection flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapAutomaticColorNonColorPixelType">
+            <summary>
+            Gets the property to work with image auto non-color pixel type for the current source.
+            </summary>
+            <value>
+            The image auto non-color pixel type.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapAutomaticCropUsesFrame">
+            <summary>
+            Gets the property to work with image auto crop flag for the current source.
+            </summary>
+            <value>
+            The image auto crop flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapAutomaticDeskew">
+            <summary>
+            Gets the property to work with image auto deskew flag for the current source.
+            </summary>
+            <value>
+            The image auto deskew flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapAutomaticLengthDetection">
+            <summary>
+            Gets the property to work with image auto length detection flag for the current source.
+            </summary>
+            <value>
+            The image auto length detection flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapAutomaticRotate">
+            <summary>
+            Gets the property to work with image auto rotate flag for the current source.
+            </summary>
+            <value>
+            The image auto rotate flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapAutoSize">
+            <summary>
+            Gets the property to work with image auto size option for the current source.
+            </summary>
+            <value>
+            The image auto size option.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapBarcodeDetectionEnabled">
+            <summary>
+            Gets the property to work with image barcode detection flag for the current source.
+            </summary>
+            <value>
+            The image barcode detection flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapBarcodeMaxRetries">
+            <summary>
+            Gets the property to work with image barcode max search retries for the current source.
+            </summary>
+            <value>
+            The image barcode max search retries.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapBarcodeMaxSearchPriorities">
+            <summary>
+            Gets the property to work with image barcode max search priorities for the current source.
+            </summary>
+            <value>
+            The image barcode max search priorities.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapBarcodeSearchMode">
+            <summary>
+            Gets the property to work with image barcode search direction for the current source.
+            </summary>
+            <value>
+            The image barcode search direction.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapBarcodeSearchPriorities">
+            <summary>
+            Gets the property to work with image barcode search priority for the current source.
+            </summary>
+            <value>
+            The image barcode search priority.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapBarcodeTimeout">
+            <summary>
+            Gets the property to work with image barcode max search timeout for the current source.
+            </summary>
+            <value>
+            The image barcode max search timeout.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapBitDepth">
+            <summary>
+            Gets the property to work with image bit depth for the current source.
+            </summary>
+            <value>
+            The image bit depth.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapBitDepthReduction">
+            <summary>
+            Gets the property to work with image bit depth reduction method for the current source.
+            </summary>
+            <value>
+            The image bit depth reduction method.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapBitOrder">
+            <summary>
+            Gets the property to work with image <see cref="T:NTwain.Data.BitOrder"/> for the current source.
+            </summary>
+            <value>
+            The image bit order.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapBitOrderCodes">
+            <summary>
+            Gets the property to work with image CCITT compression <see cref="T:NTwain.Data.BitOrder"/> for the current source.
+            </summary>
+            <value>
+            The image bit order for CCITT compression.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapBrightness">
+            <summary>
+            Gets the property to work with image brightness for the current source.
+            </summary>
+            <value>
+            The image brightness.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapCCITTKFactor">
+            <summary>
+            Gets the property to work with image CCITT K factor for the current source.
+            </summary>
+            <value>
+            The image CCITT K factor.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapColorManagementEnabled">
+            <summary>
+            Gets the property to work with image color management flag for the current source.
+            </summary>
+            <value>
+            The image color management flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapCompression">
+            <summary>
+            Gets the property to work with image <see cref="T:NTwain.Data.CompressionType"/> for the current source.
+            </summary>
+            <value>
+            The image compression.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapContrast">
+            <summary>
+            Gets the property to work with image contrast for the current source.
+            </summary>
+            <value>
+            The image contrast.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapCustHalftone">
+            <summary>
+            Gets the property to work with image square-cell halftone for the current source.
+            </summary>
+            <value>
+            The image square-cell halftone.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapExposureTime">
+            <summary>
+            Gets the property to work with image exposure time (in seconds) for the current source.
+            </summary>
+            <value>
+            The image exposure time.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapExtImageInfo">
+            <summary>
+            Gets the property to work with ext image info flag for the current source.
+            </summary>
+            <value>
+            The ext image info flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapFeederType">
+            <summary>
+            Gets the property to work with feeder type for the current source.
+            </summary>
+            <value>
+            The feeder type.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapFilmType">
+            <summary>
+            Gets the property to work with image film type for the current source.
+            </summary>
+            <value>
+            The image film type.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapFilter">
+            <summary>
+            Gets the property to work with image color filter for the current source.
+            </summary>
+            <value>
+            The image color filter type.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapFlashUsed2">
+            <summary>
+            Gets the property to work with flash option for the current source.
+            </summary>
+            <value>
+            The flash option.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapFlipRotation">
+            <summary>
+            Gets the property to work with image flip-rotation behavior for the current source.
+            </summary>
+            <value>
+            The image flip-rotation behavior.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapFrames">
+            <summary>
+            Gets the property to work with the list of frames the source will acquire on each page.
+            </summary>
+            <value>
+            The capture frames.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapGamma">
+            <summary>
+            Gets the property to work with image gamma value for the current source.
+            </summary>
+            <value>
+            The image gamma.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapHalftones">
+            <summary>
+            Gets the property to work with image halftone patterns for the current source.
+            </summary>
+            <value>
+            The image halftone patterns.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapHighlight">
+            <summary>
+            Gets the property to work with image highlight value for the current source.
+            </summary>
+            <value>
+            The image highlight.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapICCProfile">
+            <summary>
+            Gets the property to work with image icc profile for the current source.
+            </summary>
+            <value>
+            The image icc profile.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapImageDataSet">
+            <summary>
+            Gets or sets the image indices that will be delivered during the standard image transfer done in
+            States 6 and 7.
+            </summary>
+            <value>
+            The image indicies.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapImageFileFormat">
+            <summary>
+            Gets the property to work with image <see cref="T:NTwain.Data.FileFormat"/> for the current source.
+            </summary>
+            <value>
+            The image file format.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapImageFilter">
+            <summary>
+            Gets the property to work with image enhancement filter for the current source.
+            </summary>
+            <value>
+            The image enhancement filter.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapImageMerge">
+            <summary>
+            Gets the property to work with image merge option for the current source.
+            </summary>
+            <value>
+            The image merge option.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapImageMergeHeightThreshold">
+            <summary>
+            Gets the property to work with image merge height threshold for the current source.
+            </summary>
+            <value>
+            The image merge height threshold.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapJpegPixelType">
+            <summary>
+            Gets the property to work with image jpeg compression <see cref="T:NTwain.Data.PixelType"/> for the current source.
+            </summary>
+            <value>
+            The image pixel type for jpeg compression.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapJpegQuality">
+            <summary>
+            Gets the property to work with image jpeg quality for the current source.
+            </summary>
+            <value>
+            The image jpeg quality.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapJpegSubsampling">
+            <summary>
+            Gets the property to work with image jpeg sub sampling for the current source.
+            </summary>
+            <value>
+            The image jpeg sub sampling.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapLampState">
+            <summary>
+            Gets the property to work with image lamp state flag for the current source.
+            </summary>
+            <value>
+            The image lamp state flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapLightPath">
+            <summary>
+            Gets the property to work with image light path for the current source.
+            </summary>
+            <value>
+            The image light path.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapLightSource">
+            <summary>
+            Gets the property to work with image light source for the current source.
+            </summary>
+            <value>
+            The image light source.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapMaxFrames">
+            <summary>
+            Gets the property to work with image max frames for the current source.
+            </summary>
+            <value>
+            The image max frames.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapMinimumHeight">
+            <summary>
+            Gets the property to work with image minimum height for the current source.
+            </summary>
+            <value>
+            The image minimumm height.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapMinimumWidth">
+            <summary>
+            Gets the property to work with image minimum width for the current source.
+            </summary>
+            <value>
+            The image minimumm width.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapMirror">
+            <summary>
+            Gets the property to work with image mirror option for the current source.
+            </summary>
+            <value>
+            The image mirror option.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapNoiseFilter">
+            <summary>
+            Gets the property to work with image noise filter for the current source.
+            </summary>
+            <value>
+            The image noise filter.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapOrientation">
+            <summary>
+            Gets the property to work with image orientation for the current source.
+            </summary>
+            <value>
+            The image orientation.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapOverScan">
+            <summary>
+            Gets the property to work with image overscan option for the current source.
+            </summary>
+            <value>
+            The image overscan option.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapPatchCodeDetectionEnabled">
+            <summary>
+            Gets the property to work with image patch code detection flag for the current source.
+            </summary>
+            <value>
+            The image patch code detection flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapPatchCodeMaxRetries">
+            <summary>
+            Gets the property to work with image patch code max search retries for the current source.
+            </summary>
+            <value>
+            The image patch code max search retries.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapPatchCodeMaxSearchPriorities">
+            <summary>
+            Gets the property to work with image patch code max search priorities for the current source.
+            </summary>
+            <value>
+            The image patch code max search priorities.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapPatchCodeSearchMode">
+            <summary>
+            Gets the property to work with image patch code search direction for the current source.
+            </summary>
+            <value>
+            The image patch code search direction.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapPatchCodeSearchPriorities">
+            <summary>
+            Gets the property to work with image patch code search priority for the current source.
+            </summary>
+            <value>
+            The image patch code search priority.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapPatchCodeTimeout">
+            <summary>
+            Gets the property to work with image patch code max search timeout for the current source.
+            </summary>
+            <value>
+            The image patch code max search timeout.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapPhysicalHeight">
+            <summary>
+            Gets the property to work with image physical height for the current source.
+            </summary>
+            <value>
+            The image physical height.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapPhysicalWidth">
+            <summary>
+            Gets the property to work with image physical width for the current source.
+            </summary>
+            <value>
+            The image physical width.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapPixelFlavor">
+            <summary>
+            Gets the property to work with image pixel flavor for the current source.
+            </summary>
+            <value>
+            The image pixel flavor.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapPixelFlavorCodes">
+            <summary>
+            Gets the property to work with image CCITT compression <see cref="T:NTwain.Data.PixelFlavor"/> for the current source.
+            </summary>
+            <value>
+            The image pixel flavor for CCITT compression.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapPixelType">
+            <summary>
+            Gets the property to work with image <see cref="T:NTwain.Data.PixelType"/> for the current source.
+            </summary>
+            <value>
+            The image pixel type.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapPlanarChunky">
+            <summary>
+            Gets the property to work with image color format for the current source.
+            </summary>
+            <value>
+            The image color format.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapRotation">
+            <summary>
+            Gets the property to work with image rotation for the current source.
+            </summary>
+            <value>
+            The image rotation.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapShadow">
+            <summary>
+            Gets the property to work with image shadow value for the current source.
+            </summary>
+            <value>
+            The image shadow.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapSupportedBarcodeTypes">
+            <summary>
+            Gets the property to work with image barcode types for the current source.
+            </summary>
+            <value>
+            The image barcode types.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapSupportedExtImageInfo">
+            <summary>
+            Gets the property to get supported ext image info for the current source.
+            </summary>
+            <value>
+            The supported ext image info.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapSupportedPatchCodeTypes">
+            <summary>
+            Gets the property to work with image patch code types for the current source.
+            </summary>
+            <value>
+            The image patch code types.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapSupportedSizes">
+            <summary>
+            Gets the property to work with image <see cref="T:NTwain.Data.SupportedSize"/> for the current source.
+            </summary>
+            <value>
+            The image supported size.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapThreshold">
+            <summary>
+            Gets the property to work with image threshold for the current source.
+            </summary>
+            <value>
+            The image threshold.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapTiles">
+            <summary>
+            Gets the property to work with image tiles flag for the current source.
+            </summary>
+            <value>
+            The image tiles flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapTimeFill">
+            <summary>
+            Gets the property to work with image CCITT time fill for the current source.
+            </summary>
+            <value>
+            The image CCITT time fill.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapUndefinedImageSize">
+            <summary>
+            Gets the property to work with image undefined size flag for the current source.
+            </summary>
+            <value>
+            The image undefined size flag.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapUnits">
+            <summary>
+            Gets the property to work with image <see cref="T:NTwain.Data.Unit"/> for the current source.
+            </summary>
+            <value>
+            The image unit of measure.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapXferMech">
+            <summary>
+            Gets the property to work with image <see cref="T:NTwain.Data.XferMech"/> for the current source.
+            </summary>
+            <value>
+            The image xfer mech.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapXNativeResolution">
+            <summary>
+            Gets the property to work with image's native x-axis resolution for the current source.
+            </summary>
+            <value>
+            The image's native x-axis resolution.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapXResolution">
+            <summary>
+            Gets the property to work with image x-axis resolution for the current source.
+            </summary>
+            <value>
+            The image x-axis resolution.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapXScaling">
+            <summary>
+            Gets the property to work with image x-axis scaling for the current source.
+            </summary>
+            <value>
+            The image x-axis scaling.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapYNativeResolution">
+            <summary>
+            Gets the property to work with image's native y-axis resolution for the current source.
+            </summary>
+            <value>
+            The image's native y-axis resolution.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapYResolution">
+            <summary>
+            Gets the property to work with image y-axis resolution for the current source.
+            </summary>
+            <value>
+            The image y-axis resolution.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapYScaling">
+            <summary>
+            Gets the property to work with image y-axis scaling for the current source.
+            </summary>
+            <value>
+            The image y-axis scaling.
+            </value>
+        </member>
+        <member name="P:NTwain.ICapabilities.ICapZoomFactor">
+            <summary>
+            Gets the property to work with image zoom factor for the current source.
+            </summary>
+            <value>
+            The image zoom factor.
+            </value>
+        </member>
+        <member name="M:NTwain.ICapabilities.GetCurrent(NTwain.Data.CapabilityId)">
+            <summary>
+            Gets the current value for a capability.
+            </summary>
+            <param name="capabilityId">The capability id.</param>
+            <returns></returns>
+        </member>
+        <member name="M:NTwain.ICapabilities.GetDefault(NTwain.Data.CapabilityId)">
+            <summary>
+            Gets the default value for a capability.
+            </summary>
+            <param name="capabilityId">The capability id.</param>
+            <returns></returns>
+        </member>
+        <member name="M:NTwain.ICapabilities.GetValues(NTwain.Data.CapabilityId)">
+            <summary>
+            A general method that tries to get capability values from current <see cref="T:NTwain.DataSource" />.
+            </summary>
+            <param name="capabilityId">The capability id.</param>
+            <returns></returns>
+        </member>
+        <member name="M:NTwain.ICapabilities.GetValuesRaw(NTwain.Data.CapabilityId)">
+            <summary>
+            Gets all the possible values of this capability without expanding.
+            This may be required to work with large range values that cannot be safely enumerated
+            with <see cref="M:NTwain.ICapabilities.GetValues(NTwain.Data.CapabilityId)"/>.
+            </summary>
+            <param name="capabilityId">The capability id.</param>
+            <returns></returns>
+        </member>
+        <member name="M:NTwain.ICapabilities.QuerySupport(NTwain.Data.CapabilityId)">
+            <summary>
+            Gets the actual supported operations for a capability. This is not supported by all sources.
+            </summary>
+            <param name="capabilityId">The capability id.</param>
+            <returns></returns>
+        </member>
+        <member name="M:NTwain.ICapabilities.Reset(NTwain.Data.CapabilityId)">
+            <summary>
+            Resets the current value to power-on default.
+            </summary>
+            <param name="capabilityId">The capability id.</param>
+            <returns></returns>
+        </member>
+        <member name="M:NTwain.ICapabilities.ResetAll">
+            <summary>
+            Resets all values and constraint to power-on defaults.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:NTwain.IReadOnlyCapWrapper`1">
             <summary>
             Interface for reading a TWAIN capability associated with a <see cref="T:NTwain.DataSource"/>.
@@ -5067,10 +6435,11 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:NTwain.IDataSource.GetStatusUtf8">
+        <member name="M:NTwain.IDataSource.GetStatusUtf8(NTwain.Data.TWStatus)">
             <summary>
-            Gets the source status. Only call this at state 4 or higher.
+            Gets the source status string. Only call this at state 4 or higher.
             </summary>
+            <param name="status">Status from previous calls.</param>
             <returns></returns>
         </member>
         <member name="T:NTwain.ILog">
@@ -5766,10 +7135,11 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:NTwain.ITwainSession.GetStatusUtf8">
+        <member name="M:NTwain.ITwainSession.GetStatusUtf8(NTwain.Data.TWStatus)">
             <summary>
-            Gets the manager status. Only call this at state 3 or higher.
+            Gets the manager status string. Only call this at state 3 or higher.
             </summary>
+            <param name="status">Status from previous calls.</param>
             <returns></returns>
         </member>
         <member name="E:NTwain.ITwainSession.StateChanged">
@@ -5823,6 +7193,12 @@
             Synchronously invokes the specified action on the message loop thread.
             </summary>
             <param name="action">The action.</param>
+        </member>
+        <member name="M:NTwain.MessageLoopHook.Rethrow(System.Exception)">
+            <summary>
+            Rethrows the specified excetion while keeping stack trace.
+            </summary>
+            <param name="ex">The ex.</param>
         </member>
         <member name="T:NTwain.WindowsFormsMessageLoopHook">
             <summary>
@@ -5995,21 +7371,6 @@
         <member name="P:NTwain.Properties.Resources.SourceRequired">
             <summary>
               Looks up a localized string similar to Source name is required..
-            </summary>
-        </member>
-        <member name="T:NTwain.VersionInfo">
-            <summary>
-            Contains version info of NTwain.
-            </summary>
-        </member>
-        <member name="F:NTwain.VersionInfo.Release">
-            <summary>
-            The major release version number.
-            </summary>
-        </member>
-        <member name="F:NTwain.VersionInfo.Build">
-            <summary>
-            The build release version number.
             </summary>
         </member>
         <member name="T:NTwain.ProtocolVersions">
@@ -6882,7 +8243,7 @@
             Represents <see cref="F:NTwain.Data.DataArgumentType.StatusUtf8"/>.
             </summary>
         </member>
-        <member name="M:NTwain.Triplets.StatusUtf8.GetManager(NTwain.Data.TWStatusUtf8@)">
+        <member name="M:NTwain.Triplets.StatusUtf8.GetManager(NTwain.Data.TWStatus,NTwain.Data.TWStatusUtf8@)">
             <summary>
             Translate the contents of a TW_STATUS structure received from the manager into a localized UTF-8
             encoded string.
@@ -6890,7 +8251,7 @@
             <param name="status">The status.</param>
             <returns></returns>
         </member>
-        <member name="M:NTwain.Triplets.StatusUtf8.GetSource(NTwain.Data.TWStatusUtf8@)">
+        <member name="M:NTwain.Triplets.StatusUtf8.GetSource(NTwain.Data.TWStatus,NTwain.Data.TWStatusUtf8@)">
             <summary>
             Translate the contents of a TW_STATUS structure received from a Source into a localized UTF-8
             encoded string.
@@ -6959,6 +8320,16 @@
             </summary>
         </member>
         <member name="M:NTwain.Triplets.DGCustom.DsmEntry(NTwain.Data.DataGroups,NTwain.Data.DataArgumentType,NTwain.Data.Message,System.IntPtr@)">
+            <summary>
+            Direct DSM_Entry call with full arguments for custom values.
+            </summary>
+            <param name="group">The group.</param>
+            <param name="dat">The dat.</param>
+            <param name="message">The message.</param>
+            <param name="data">The data.</param>
+            <returns></returns>
+        </member>
+        <member name="M:NTwain.Triplets.DGCustom.DsmEntry(NTwain.Data.DataGroups,NTwain.Data.DataArgumentType,NTwain.Data.Message,System.IntPtr)">
             <summary>
             Direct DSM_Entry call with full arguments for custom values.
             </summary>
@@ -7560,10 +8931,11 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:NTwain.TwainSession.GetStatusUtf8">
+        <member name="M:NTwain.TwainSession.GetStatusUtf8(NTwain.Data.TWStatus)">
             <summary>
-            Gets the manager status. Only call this at state 3 or higher.
+            Gets the manager status string. Only call this at state 3 or higher.
             </summary>
+            <param name="status">Status from previous calls.</param>
             <returns></returns>
         </member>
         <member name="M:NTwain.TwainSession.ForceStepDown(System.Int32)">
@@ -7799,7 +9171,14 @@
             Contains extension methods for wpf images.
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:NTwain.WpfImageTools.ConvertToWpfBitmap(System.IO.Stream)" -->
+        <member name="M:NTwain.WpfImageTools.ConvertToWpfBitmap(System.IO.Stream)">
+            <summary>
+            Loads a <see cref="T:System.IO.Stream" /> into WPF <see cref="T:System.Windows.Media.Imaging.BitmapSource" />. The image created
+            will be a copy so the stream can be disposed once this call returns.
+            </summary>
+            <param name="stream">The image stream.</param>
+            <returns></returns>
+        </member>
         <member name="M:NTwain.WpfImageTools.ConvertToWpfBitmap(System.IO.Stream,System.Int32,System.Int32)">
             <summary>
             Loads a <see cref="T:System.IO.Stream" /> into WPF <see cref="T:System.Windows.Media.Imaging.BitmapSource" />. The image created
