@@ -1,6 +1,8 @@
 ﻿using Fleck;
 using NTwain;
 using NTwain.Data;
+using PdfSharp.Drawing;
+using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,6 +27,7 @@ namespace NewScan
         bool _loadingCaps;
         List<IWebSocketConnection> allSockets;
         WebSocketServer server;
+        List<XImage> images;
         public Form1()
         {
             InitializeComponent();
@@ -45,6 +48,7 @@ namespace NewScan
             this.WindowState = FormWindowState.Minimized;
             this.ShowInTaskbar = false;
 
+            images = new List<XImage>();
             allSockets = new List<IWebSocketConnection>();
             server = new WebSocketServer("ws://0.0.0.0:8181");
             server.Start(socket =>
@@ -126,11 +130,12 @@ namespace NewScan
                     var stream = e.GetNativeImageStream();
                     if (stream != null)
                     {
-                        var outPut = StreamToByte(stream);
-                        foreach (var socket in allSockets.ToList())
-                        {
-                            socket.Send(outPut);
-                        }
+                        images.Add(XImage.FromStream(stream));
+                        //var outPut = StreamToByte(stream);
+                        //foreach (var socket in allSockets.ToList())
+                        //{
+                        //    socket.Send(outPut);
+                        //}
                     }
                 }
                 else if (!string.IsNullOrEmpty(e.FileDataPath))
@@ -142,6 +147,22 @@ namespace NewScan
             _twain.SourceDisabled += (s, e) =>
             {
                 PlatformInfo.Current.Log.Info("Source disabled event on thread " + Thread.CurrentThread.ManagedThreadId);
+                PdfDocument document = new PdfDocument();
+                foreach (XImage image in images)
+                {
+                    PdfPage page = document.AddPage();
+                    XGraphics gfx = XGraphics.FromPdfPage(page);
+                    gfx.DrawImage(image, 0, 0);
+                }
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    document.Save(stream);
+                    foreach (var socket in allSockets.ToList())
+                    {
+                        socket.Send(stream.ToArray());
+                    }
+                }
+                images.Clear();
                 this.BeginInvoke(new Action(() =>
                 {
                     btnStopScan.Enabled = false;
