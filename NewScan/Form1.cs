@@ -147,22 +147,25 @@ namespace NewScan
             _twain.SourceDisabled += (s, e) =>
             {
                 PlatformInfo.Current.Log.Info("Source disabled event on thread " + Thread.CurrentThread.ManagedThreadId);
-                PdfDocument document = new PdfDocument();
-                foreach (XImage image in images)
+                if (images.Count > 0)
                 {
-                    PdfPage page = document.AddPage();
-                    XGraphics gfx = XGraphics.FromPdfPage(page);
-                    gfx.DrawImage(image, 0, 0);
-                }
-                using (MemoryStream stream = new MemoryStream())
-                {
-                    document.Save(stream);
-                    foreach (var socket in allSockets.ToList())
+                    PdfDocument document = new PdfDocument();
+                    foreach (XImage image in images)
                     {
-                        socket.Send(stream.ToArray());
+                        PdfPage page = document.AddPage();
+                        XGraphics gfx = XGraphics.FromPdfPage(page);
+                        gfx.DrawImage(image, 0, 0);
                     }
+                    using (MemoryStream stream = new MemoryStream())
+                    {
+                        document.Save(stream);
+                        foreach (var socket in allSockets.ToList())
+                        {
+                            socket.Send(stream.ToArray());
+                        }
+                    }
+                    images.Clear();
                 }
-                images.Clear();
                 this.BeginInvoke(new Action(() =>
                 {
                     btnStopScan.Enabled = false;
