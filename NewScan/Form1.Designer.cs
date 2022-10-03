@@ -244,7 +244,7 @@
             this.Controls.Add(this.ckDuplex);
             this.Controls.Add(this.toolStrip1);
             this.Name = "Form1";
-            this.Text = "Web Scanner";
+            this.Text = "Сканирование Vozim";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Resize += new System.EventHandler(this.Form1_Resize);
             this.toolStrip1.ResumeLayout(false);

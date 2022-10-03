@@ -71,6 +71,12 @@ namespace NewScan
                             this.WindowState = FormWindowState.Normal;
                         }));
                     }
+                    if (message == "1200")
+                    {
+                        this.Invoke(new Action(() => {
+                            this.WindowState = FormWindowState.Minimized;
+                        }));
+                    }
                 };
             });
 

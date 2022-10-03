@@ -11,3 +11,26 @@ C:\Users\MGR\Documents\Visual Studio 2015\Projects\NewScan\NewScan\obj\Release\N
 C:\Users\MGR\Documents\Visual Studio 2015\Projects\NewScan\NewScan\obj\Release\NewScan.csproj.GenerateResource.Cache
 C:\Users\MGR\Documents\Visual Studio 2015\Projects\NewScan\NewScan\obj\Release\NewScan.exe
 C:\Users\MGR\Documents\Visual Studio 2015\Projects\NewScan\NewScan\obj\Release\NewScan.pdb
+C:\scanner\ScanAppForWeb\NewScan\bin\Release\NewScan.exe.config
+C:\scanner\ScanAppForWeb\NewScan\bin\Release\NewScan.exe
+C:\scanner\ScanAppForWeb\NewScan\bin\Release\NewScan.pdb
+C:\scanner\ScanAppForWeb\NewScan\bin\Release\Fleck.dll
+C:\scanner\ScanAppForWeb\NewScan\bin\Release\NTwain.dll
+C:\scanner\ScanAppForWeb\NewScan\bin\Release\PdfSharp.Charting.dll
+C:\scanner\ScanAppForWeb\NewScan\bin\Release\PdfSharp.dll
+C:\scanner\ScanAppForWeb\NewScan\bin\Release\NTwain.pdb
+C:\scanner\ScanAppForWeb\NewScan\bin\Release\NTwain.xml
+C:\scanner\ScanAppForWeb\NewScan\bin\Release\PdfSharp.xml
+C:\scanner\ScanAppForWeb\NewScan\bin\Release\PdfSharp.Charting.xml
+C:\scanner\ScanAppForWeb\NewScan\bin\Release\de\PdfSharp.resources.dll
+C:\scanner\ScanAppForWeb\NewScan\bin\Release\de\PdfSharp.Charting.resources.dll
+C:\scanner\ScanAppForWeb\NewScan\obj\Release\NewScan.csproj.AssemblyReference.cache
+C:\scanner\ScanAppForWeb\NewScan\obj\Release\NewScan.csproj.SuggestedBindingRedirects.cache
+C:\scanner\ScanAppForWeb\NewScan\obj\Release\NewScan.Form1.resources
+C:\scanner\ScanAppForWeb\NewScan\obj\Release\NewScan.Properties.Resources.resources
+C:\scanner\ScanAppForWeb\NewScan\obj\Release\NewScan.SplashScreen.resources
+C:\scanner\ScanAppForWeb\NewScan\obj\Release\NewScan.csproj.GenerateResource.cache
+C:\scanner\ScanAppForWeb\NewScan\obj\Release\NewScan.csproj.CoreCompileInputs.cache
+C:\scanner\ScanAppForWeb\NewScan\obj\Release\NewScan.csproj.CopyComplete
+C:\scanner\ScanAppForWeb\NewScan\obj\Release\NewScan.exe
+C:\scanner\ScanAppForWeb\NewScan\obj\Release\NewScan.pdb
