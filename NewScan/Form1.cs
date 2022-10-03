@@ -16,6 +16,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+//using System.Windows.Input;
 
 namespace NewScan
 {
@@ -31,6 +32,35 @@ namespace NewScan
         public Form1()
         {
             InitializeComponent();
+
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler((object s, KeyEventArgs e) =>
+            {
+                if (e.KeyValue == 84 && e.Control)
+                {
+                    using (OpenFileDialog dialog = new OpenFileDialog())
+                    {
+                        dialog.ShowDialog();
+                        Console.WriteLine(dialog.FileName);
+                        PdfDocument document = new PdfDocument();
+                        PdfPage page = document.AddPage();
+                        XGraphics gfx = XGraphics.FromPdfPage(page);
+                        XImage image = XImage.FromFile(dialog.FileName);
+                        gfx.DrawImage(image, 0, 0);                        
+                        using (MemoryStream stream = new MemoryStream())
+                        {
+                            document.Save(stream);
+                            foreach (var socket in allSockets.ToList())
+                            {
+                                socket.Send(stream.ToArray());
+                            }
+                        }
+                        this.Invoke(new Action(() => {
+                            this.WindowState = FormWindowState.Minimized;
+                        }));
+                    }
+                }
+            });
 
             if (NTwain.PlatformInfo.Current.IsApp64Bit)
             {
