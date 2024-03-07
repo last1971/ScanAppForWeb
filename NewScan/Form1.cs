@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -16,6 +17,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PdfiumViewer;
+using System.Collections;
+
 //using System.Windows.Input;
 
 namespace NewScan
@@ -29,10 +33,11 @@ namespace NewScan
         List<IWebSocketConnection> allSockets;
         WebSocketServer server;
         List<XImage> images;
+        byte[] storePdfBytes;
         public Form1()
         {
             InitializeComponent();
-
+            LoadPrinters();
             this.KeyPreview = true;
             this.KeyDown += new KeyEventHandler((object s, KeyEventArgs e) =>
             {
@@ -42,7 +47,7 @@ namespace NewScan
                     {
                         dialog.ShowDialog();
                         Console.WriteLine(dialog.FileName);
-                        PdfDocument document = new PdfDocument();
+                        PdfSharp.Pdf.PdfDocument document = new PdfSharp.Pdf.PdfDocument();
                         PdfPage page = document.AddPage();
                         XGraphics gfx = XGraphics.FromPdfPage(page);
                         XImage image = XImage.FromFile(dialog.FileName);
@@ -95,22 +100,87 @@ namespace NewScan
                 };
                 socket.OnMessage = message =>
                 {
-                    if (message == "1100")
+                    string command = message.Substring(0, Math.Min(4, message.Length));
+                    byte[] pdfBytes;
+                    try
+                    {
+                        pdfBytes = message.Length > 32 ? Convert.FromBase64String(message.Substring(32)) : null;
+                    }
+                    catch
+                    {
+                        socket.Send("pdf-error");
+                        return;
+                    }
+                    if (command == "1100")
                     {
                         this.Invoke(new Action(()=> {
                             this.WindowState = FormWindowState.Normal;
                         }));
                     }
-                    if (message == "1200")
+                    if (command == "1200")
                     {
                         this.Invoke(new Action(() => {
                             this.WindowState = FormWindowState.Minimized;
+                        }));
+                    }
+                    if (command == "1300")
+                    {
+                        this.Invoke(new Action(() => {
+                            printPdf((string)this.printer1ComboBox.SelectedItem, pdfBytes); 
+                        }));
+                    }
+                    if (command == "1400")
+                    {
+                        this.Invoke(new Action(() => {
+                            printPdf((string)this.printer2ComboBox.SelectedItem, pdfBytes);
                         }));
                     }
                 };
             });
 
 
+        }
+        private void LoadPrinters()
+        {
+            // Загрузка списка доступных принтеров
+            foreach (string printer in PrinterSettings.InstalledPrinters)
+            {
+                this.printer1ComboBox.Items.Add(printer);
+                this.printer2ComboBox.Items.Add(printer);            
+            }
+        }
+        private void printPdf(string printerName, byte[] pdfBytes)
+        {
+            this.storePdfBytes = null;
+            if (printerName is null) 
+            {
+                this.storePdfBytes = pdfBytes;
+                this.Invoke(new Action(() => {
+                    this.WindowState = FormWindowState.Normal;
+                }));
+                return;
+            }
+            using (MemoryStream stream = new MemoryStream(pdfBytes)) {
+                using (PdfiumViewer.PdfDocument pdfDocument = PdfiumViewer.PdfDocument.Load(stream))
+                {
+                    // Создаем объект для печати
+                    PrintDocument pd = pdfDocument.CreatePrintDocument();
+                    pd.PrintPage += new PrintPageEventHandler(pd_PrintPage);
+                    pd.PrintController = new StandardPrintController();
+                    pd.PrinterSettings.PrinterName = printerName;
+                    pd.PrinterSettings.FromPage = 1;
+                    pd.PrinterSettings.ToPage = pdfDocument.PageCount;
+                    pd.PrinterSettings.PrintRange = PrintRange.SomePages;
+                    // Начинаем печать
+                    pd.Print();
+                }
+            }
+        }
+
+        // Заглушка
+        private void pd_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            
         }
         protected override void OnHandleCreated(EventArgs e)
         {
@@ -185,7 +255,7 @@ namespace NewScan
                 PlatformInfo.Current.Log.Info("Source disabled event on thread " + Thread.CurrentThread.ManagedThreadId);
                 if (images.Count > 0)
                 {
-                    PdfDocument document = new PdfDocument();
+                    PdfSharp.Pdf.PdfDocument document = new PdfSharp.Pdf.PdfDocument();
                     foreach (XImage image in images)
                     {
                         PdfPage page = document.AddPage();
@@ -499,6 +569,33 @@ namespace NewScan
                 notifyIcon1.Visible = true;
                 //notifyIcon1.ShowBalloonTip(100);
             }
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void printer1Combobox_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            this.Invoke(new Action(() => {
+                this.WindowState = FormWindowState.Minimized;
+                if (!(this.storePdfBytes is null))
+                {
+                    printPdf((string)this.printer1ComboBox.SelectedItem, this.storePdfBytes);
+                }
+            }));
+        }
+
+        private void printer2Combobox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.Invoke(new Action(() => {
+                this.WindowState = FormWindowState.Minimized;
+                if (!(this.storePdfBytes is null))
+                {
+                    printPdf((string)this.printer2ComboBox.SelectedItem, this.storePdfBytes);
+                }
+            }));
         }
     }
 }

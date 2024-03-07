@@ -46,6 +46,10 @@
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printer1ComboBox = new System.Windows.Forms.ComboBox();
+            this.printer2ComboBox = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -219,20 +223,61 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(93, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(94, 26);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // printer1ComboBox
+            // 
+            this.printer1ComboBox.FormattingEnabled = true;
+            this.printer1ComboBox.Location = new System.Drawing.Point(128, 260);
+            this.printer1ComboBox.Name = "printer1ComboBox";
+            this.printer1ComboBox.Size = new System.Drawing.Size(196, 21);
+            this.printer1ComboBox.TabIndex = 12;
+            this.printer1ComboBox.SelectedIndexChanged += new System.EventHandler(this.printer1Combobox_SelectedIndexChanged_1);
+            // 
+            // printer2ComboBox
+            // 
+            this.printer2ComboBox.FormattingEnabled = true;
+            this.printer2ComboBox.Location = new System.Drawing.Point(128, 302);
+            this.printer2ComboBox.Name = "printer2ComboBox";
+            this.printer2ComboBox.Size = new System.Drawing.Size(196, 21);
+            this.printer2ComboBox.TabIndex = 13;
+            this.printer2ComboBox.SelectedIndexChanged += new System.EventHandler(this.printer2Combobox_SelectedIndexChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(12, 263);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(66, 13);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Принтер A4";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(12, 305);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(100, 13);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "Принтер Этикеток";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(361, 267);
+            this.ClientSize = new System.Drawing.Size(361, 344);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.printer2ComboBox);
+            this.Controls.Add(this.printer1ComboBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -275,6 +320,10 @@
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ComboBox printer1ComboBox;
+        private System.Windows.Forms.ComboBox printer2ComboBox;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
     }
 }
 

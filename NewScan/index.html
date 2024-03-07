@@ -16,6 +16,10 @@
         $(document).ready(function () {
             selDiv = $("#selectedFiles");
             $("body").on("click", ".selFile", editFiles);
+            $('input[type="file"]').on('change', function (e) {
+                var printer = $(this).attr('data-printer');
+                convertToBase64(e.target.files[0], (base64) => ws.send(printer + base64));
+            });
         });
 
         var start = function () {
@@ -26,7 +30,9 @@
             window.ws = new wsImpl('ws://localhost:8181/');
             ws.onmessage = function (e) {
                 if (typeof e.data === "string") {
-                    //IF Received Data is String
+                    if (e.data === 'pdf-error') {
+                        alert('Выбран не pdf файл');
+                    }
                 }
                 else if (e.data instanceof ArrayBuffer) {
                    //IF Received Data is ArrayBuffer
@@ -64,6 +70,10 @@
             ws.send("1100");
         };
 
+        function print(com) {
+            ws.send(com);
+        };
+
         function editFiles(e) {
             var file = $(this).data("file");
             for (var i = 0; i < storedFiles.length; i++) {
@@ -84,15 +94,24 @@
             }
         };
 
+        function convertToBase64(file, onSuccess) {
+            const reader = new FileReader();
+            reader.onload = () => onSuccess(reader.result);
+            reader.readAsDataURL(file);
+        }
     </script>
 </head>
 <body>
     <button type="button" onclick="scanImage();" class="btn btn-primary btn-lg">Scan</button>
-    <br/>
+    <br />
+    <label>Принтер А4</label><input type="file" data-printer="1300" placeholder="Принтер 1" />
+    <br />
+    <label>Принтер Этикеток</label><input type="file" data-printer="1400" placeholder="Принтер 2" />
+    <br />
 
 
-    <a href="/SrcFile/ScanApps.zip" download>DDDD</a>
-       <div id="selectedFiles" class="row" style="padding: 3px"></div>
+    <a href="/SrcFile/ScanApps.zip" download>Источник</a>
+    <div id="selectedFiles" class="row" style="padding: 3px"></div>
 
     <div class="modal fade mm" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
